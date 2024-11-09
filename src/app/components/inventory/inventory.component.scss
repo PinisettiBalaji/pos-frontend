@@ -1,0 +1,94 @@
+/* Container for the inventory page */
+.inventory-container {
+    padding: 20px;
+}
+
+/* Header with the "Add New Item" button */
+.header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+/* Styling for the product list */
+.product-list {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+/* For the product table layout */
+.product-table {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Product headers */
+.product-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}
+
+.product-header span {
+    padding: 0 15px;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Product data styling */
+.product-data {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.product-data span {
+    padding: 0 15px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Styling for the action buttons */
+.product-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Styling for action buttons */
+button.mat-icon-button {
+    padding: 5px;
+    font-size: 20px;
+    color: #555;
+}
+
+/* Add hover effect to action buttons */
+button.mat-icon-button:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+/* Styling for the ID column */
+.product-id {
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+
+    .product-header,
+    .product-data {
+        grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+    }
+}   

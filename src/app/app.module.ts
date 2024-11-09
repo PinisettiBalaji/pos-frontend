@@ -21,7 +21,12 @@ import { OrderListComponent } from './components/order-list/order-list.component
 import { MatTableModule } from '@angular/material/table';
 import { CartComponent } from './components/cart/cart.component';
 import { FormsModule } from '@angular/forms';
-
+import { InventoryComponent } from './components/inventory/inventory.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { AddItemDialogComponent } from './dialogBoxes/add-item-dialog/add-item-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EditItemDialogComponent } from './dialogBoxes/edit-item-dialog/edit-item-dialog.component';
+import { DeleteItemDialogComponent } from './dialogBoxes/delete-item-dialog/delete-item-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,11 @@ import { FormsModule } from '@angular/forms';
     CustomerListComponent,
     ReportListComponent,
     OrderListComponent,
-    CartComponent
+    CartComponent,
+    InventoryComponent,
+    AddItemDialogComponent,
+    EditItemDialogComponent,
+    DeleteItemDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +56,9 @@ import { FormsModule } from '@angular/forms';
     MatGridListModule,
     MatIconModule,
     MatTableModule,
-    FormsModule
+    FormsModule,
+    MatFormFieldModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
