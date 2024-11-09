@@ -1,0 +1,23 @@
+<div class="order-list">
+    <h2>Order List</h2>
+    <mat-table [dataSource]="orders">
+      <ng-container matColumnDef="orderId">
+        <mat-header-cell *matHeaderCellDef> Order ID </mat-header-cell>
+        <mat-cell *matCellDef="let order"> {{ order.orderId }} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="customer">
+        <mat-header-cell *matHeaderCellDef> Customer </mat-header-cell>
+        <mat-cell *matCellDef="let order"> {{ order.customer }} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="total">
+        <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
+        <mat-cell *matCellDef="let order"> {{ order.total | currency }} </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+  

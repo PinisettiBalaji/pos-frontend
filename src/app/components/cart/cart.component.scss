@@ -1,0 +1,19 @@
+.cart-container {
+    width: 300px;  // Ensure cart container has a fixed width if necessary
+  }
+  
+  .cart-item {
+    display: flex;
+    justify-content: space-between; /* Aligns text and button on opposite sides */
+    align-items: center;
+  }
+  
+  .item-details {
+    flex: 1;  // This will ensure the text takes up available space
+    padding-top: 10px;
+  }
+  
+  mat-icon-button {
+    margin-left: 8px;  /* Space between the text and the button */
+  }
+  

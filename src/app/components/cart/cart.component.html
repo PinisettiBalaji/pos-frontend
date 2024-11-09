@@ -1,0 +1,28 @@
+<!-- src/app/components/cart/cart.component.html -->
+<div class="cart">
+    <h2>Your Cart</h2>
+    <p>Items in Cart: {{ itemCount }}</p> <!-- Display item count -->
+
+    <mat-list *ngIf="cartItems.length; else emptyCart">
+        <mat-list-item *ngFor="let item of cartItems">
+            <div class="cart-item">
+                <div class="item-details">
+                    <p>{{ item.name }} - {{ item.price | currency }} x {{ item.quantity }}</p>
+                </div>
+                <!-- Button to remove item -->
+                <button mat-icon-button (click)="removeFromCart(item)">
+                    <mat-icon>remove_shopping_cart</mat-icon> <!-- Icon inside the button -->
+                </button>
+            </div>
+        </mat-list-item>
+    </mat-list>
+
+    <ng-template #emptyCart>
+        <p>Your cart is empty</p>
+    </ng-template>
+
+    <div class="cart-total">
+        <h3>Total: {{ totalPrice | currency }}</h3>
+        <button mat-raised-button color="primary" (click)="checkout()">Checkout</button>
+    </div>
+</div>
