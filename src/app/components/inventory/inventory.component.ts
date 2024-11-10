@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { InventoryItem } from 'src/app/models/inventory-item.model';
 import { InventoryService } from 'src/app/services/inventory.service';
@@ -15,10 +15,13 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class InventoryComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'price', 'quantity', 'totalValue', 'edit', 'delete'];
+  displayedColumns: string[] = ['id', 'name', 'price', 'quantity', 'totalValue', 'actions'];
   // inventoryItems$!: Observable<InventoryItem[]>;
   dataSource: MatTableDataSource<InventoryItem> = new MatTableDataSource<InventoryItem>(); // Initialize with empty data source
 
+  @Input() searchTerm: string = ''; // Receive search term
+  filteredInventory = [...this.dataSource.data];
+  
 
   constructor(private dialog: MatDialog, private inventoryService: InventoryService) { }
   ngOnInit() {
@@ -27,6 +30,20 @@ export class InventoryComponent implements OnInit {
       // Update the dataSource when items are fetched from the service
       this.dataSource.data = items;
     });
+  }
+
+  ngOnChanges() {
+    this.filterInventory(); // Reapply the filter whenever the search term changes
+  }
+
+  filterInventory() {
+    if (this.searchTerm) {
+      this.filteredInventory = this.dataSource.data .filter(item =>
+        item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    } else {
+      this.filteredInventory = [...this.dataSource.data]; // If no search term, show all inventory items
+    }
   }
 
   openAddItemDialog(): void {

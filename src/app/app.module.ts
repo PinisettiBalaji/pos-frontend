@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+//components
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { ReportListComponent } from './components/report-list/report-list.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
@@ -59,8 +62,12 @@ import { DeleteItemDialogComponent } from './dialogBoxes/delete-item-dialog/dele
     FormsModule,
     MatFormFieldModule,
     MatDialogModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
-  providers: [],
+  providers: [
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'INR' },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

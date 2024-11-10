@@ -10,6 +10,8 @@ export class MainLayoutComponent {
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
   isSidenavOpened = true;  // Set to true if you want it open by default
+  searchValue = ''; 
+  currentPage = 'products'; 
 
   toggleSidenav() {
     this.isSidenavOpened = !this.isSidenavOpened;

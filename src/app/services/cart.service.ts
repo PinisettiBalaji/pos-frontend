@@ -8,40 +8,56 @@ import { CartItem } from '../models/cart-item.model';
 export class CartService {
 
   constructor() { }
+  private cartItems = new BehaviorSubject<CartItem[]>([]); // Observable holding the cart items
+  private cartItemCountSubject = new BehaviorSubject<number>(0); // Observable for cart item count
 
-  private cartItems = new BehaviorSubject<CartItem[]>([]);  // Observable that holds the cart items
-  private cartItemCountSubject = new BehaviorSubject<number>(0);  // Observable for the cart item count
-
-  // Observable to expose the cart item count
-  cartItemCount$ = this.cartItemCountSubject.asObservable();
-
-  // Observable to expose the cart items
+  // Observable for cart items
   cartItems$ = this.cartItems.asObservable();
 
-  // Add item to the cart
-  addToCart(item: CartItem) {
-    const currentItems = this.cartItems.value;  // Get the current cart items
-    const existingItem = currentItems.find(cartItem => cartItem.name === item.name);  // Find if the item already exists
+  // Observable for cart item count
+  cartItemCount$ = this.cartItemCountSubject.asObservable();
 
-    if (existingItem) {
-      existingItem.quantity += item.quantity;  // Increment quantity if item exists
-    } else {
-      currentItems.push({ ...item, quantity: item.quantity });  // Add new item with quantity 1 if it doesn't exist
-    }
-    this.cartItems.next(currentItems);  // Update the cart with new items
-    this.cartItemCountSubject.next(currentItems.length);  // Update the cart item count
-  }
-
-  // Remove item from the cart
-  removeFromCart(item: CartItem) {
-    let currentItems = this.cartItems.value;  // Get the current cart items
-    currentItems = currentItems.filter(cartItem => cartItem !== item);  // Remove the item
-    this.cartItems.next(currentItems);  // Update the cart with the new items
-    this.cartItemCountSubject.next(currentItems.length);  // Update the cart item count
-  }
-
-  // Get the current item count
+  // Get current cart item count
   getCartItemCount(): number {
     return this.cartItems.value.length;
+  }
+
+  // Add item to cart
+  addToCart(item: CartItem) {
+    const currentItems = this.cartItems.value;
+    const existingItem = currentItems.find((cartItem) => cartItem.name === item.name);
+
+    if (existingItem) {
+      existingItem.quantity += item.quantity; // If item exists, update quantity
+    } else {
+      currentItems.push({ ...item, quantity: item.quantity }); // Otherwise, add the item
+    }
+
+    this.cartItems.next(currentItems); // Update the cart
+    this.cartItemCountSubject.next(currentItems.length); // Update the item count
+  }
+
+  // Remove item from cart
+  removeFromCart(item: CartItem) {
+    let currentItems = this.cartItems.value;
+    currentItems = currentItems.filter((cartItem) => cartItem !== item);
+    this.cartItems.next(currentItems); // Update cart
+    this.cartItemCountSubject.next(currentItems.length); // Update count
+  }
+
+  // Update quantity of item in the cart
+  updateQuantity(item: CartItem, action: 'increase' | 'decrease') {
+    const currentItems = this.cartItems.value;
+    const existingItem = currentItems.find((cartItem) => cartItem.name === item.name);
+
+    if (existingItem) {
+      if (action === 'increase') {
+        existingItem.quantity++;
+      } else if (action === 'decrease' && existingItem.quantity > 1) {
+        existingItem.quantity--;
+      }
+    }
+
+    this.cartItems.next(currentItems); // Update cart with new quantity
   }
 }
