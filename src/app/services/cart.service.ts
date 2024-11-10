@@ -60,4 +60,9 @@ export class CartService {
 
     this.cartItems.next(currentItems); // Update cart with new quantity
   }
+
+  clearCart(): void {
+    this.cartItems.next([]);
+    this.cartItemCountSubject.next(0);
+  }
 }

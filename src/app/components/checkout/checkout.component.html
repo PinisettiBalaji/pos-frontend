@@ -1,0 +1,48 @@
+<div class="checkout-container">
+    <h2>Checkout</h2>
+
+    <!-- Cart Summary -->
+    <div class="checkout-container">
+        <h2>Checkout</h2>
+
+        <div class="cart-summary">
+            <div *ngFor="let item of cartItems" class="cart-summary-item">
+                <span>{{ item.name }} (x{{ item.quantity }})</span>
+                <span>{{ item.price | currency }}</span>
+            </div>
+        </div>
+        <div class="total-amount">
+            Total: {{ totalAmount | currency }}
+        </div>
+        <!-- User Details Form -->
+        <form (ngSubmit)="submitOrder()">
+            <mat-form-field class="checkout-input">
+                <mat-label>Name</mat-label>
+                <input matInput [(ngModel)]="name" name="name" required>
+            </mat-form-field>
+            <mat-form-field class="checkout-input">
+                <mat-label>Email</mat-label>
+                <input matInput [(ngModel)]="email" name="email" type="email" required>
+            </mat-form-field>
+
+            <mat-form-field class="checkout-input">
+                <mat-label>Address</mat-label>
+                <textarea matInput [(ngModel)]="address" name="address" required></textarea>
+            </mat-form-field>
+
+            <mat-form-field class="checkout-input">
+                <mat-label>Payment Method</mat-label>
+                <mat-select [(ngModel)]="paymentMethod" name="paymentMethod">
+                    <mat-option value="Credit Card">Credit Card</mat-option>
+                    <mat-option value="Debit Card">Debit Card</mat-option>
+                    <mat-option value="Cash">Cash</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+
+        <div class="action-buttons">
+            <button mat-raised-button color="warn" (click)="cancelOrder()">Cancel</button>
+            <button mat-raised-button color="primary" (click)="submitOrder()">Place Order</button>
+        </div>
+    </div>
+</div>

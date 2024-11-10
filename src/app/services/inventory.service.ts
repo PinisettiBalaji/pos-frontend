@@ -6,38 +6,53 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InventoryService {
-  private inventoryItems = new BehaviorSubject<InventoryItem[]>([
-    { id: 1, name: 'Laptop', price: 1000, quantity: 10 },
-    { id: 2, name: 'Smartphone', price: 500, quantity: 20 },
-    { id: 3, name: 'Headphones', price: 150, quantity: 50 },
-  ]);
+  private inventoryItems: InventoryItem[] = []; // In-memory inventory data
+  private inventorySubject = new BehaviorSubject<InventoryItem[]>(this.inventoryItems);
+
 
   // inventoryItems$ = this.inventoryItems.asObservable();
 
-  constructor() { }
+  constructor() {
+    this.inventoryItems = [
+      { id: 1, name: 'Potatoes', price: 40, quantity: 100 },
+      { id: 2, name: 'Tomatoes', price: 30, quantity: 120 },
+      { id: 2, name: 'Onions', price: 50, quantity: 1120 },
+    ];
+    this.inventorySubject.next(this.inventoryItems);
+  }
 
   getInventoryItems(): Observable<InventoryItem[]> {
-    return this.inventoryItems.asObservable();
+    return this.inventorySubject.asObservable();
   }
 
 
   addItem(item: any) {
-    const currentItems = this.inventoryItems.value;
+    const currentItems = this.inventorySubject.value;
     item.id = currentItems.length + 1; // Generate a new ID for the item
-    this.inventoryItems.next([...currentItems, item]); // Add new item to the inventory
+    this.inventorySubject.next([...currentItems, item]); // Add new item to the inventory
   }
 
   updateItem(updatedItem: any) {
-    const currentItems = this.inventoryItems.value;
+    const currentItems = this.inventorySubject.value;
     const index = currentItems.findIndex(item => item.id === updatedItem.id);
     if (index > -1) {
       currentItems[index] = updatedItem; // Update the existing item
-      this.inventoryItems.next([...currentItems]);
+      this.inventorySubject.next([...currentItems]);
     }
   }
 
   deleteItem(itemId: number) {
-    const currentItems = this.inventoryItems.value;
-    this.inventoryItems.next(currentItems.filter(item => item.id !== itemId)); // Remove item by ID
+    const currentItems = this.inventorySubject.value;
+    this.inventorySubject.next(currentItems.filter(item => item.id !== itemId)); // Remove item by ID
+  }
+
+  updateInventory(orderItems: { id: number, quantity: number }[]) {
+    orderItems.forEach((orderItem) => {
+      const inventoryItem = this.inventoryItems.find((item) => item.id === orderItem.id);
+      if (inventoryItem) {
+        inventoryItem.quantity -= orderItem.quantity;
+      }
+    });
+    this.inventorySubject.next(this.inventoryItems);
   }
 }

@@ -30,6 +30,9 @@ import { AddItemDialogComponent } from './dialogBoxes/add-item-dialog/add-item-d
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditItemDialogComponent } from './dialogBoxes/edit-item-dialog/edit-item-dialog.component';
 import { DeleteItemDialogComponent } from './dialogBoxes/delete-item-dialog/delete-item-dialog.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { MatSelectModule } from '@angular/material/select';
+import { SalesReportComponent } from './components/sales-report/sales-report.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,9 @@ import { DeleteItemDialogComponent } from './dialogBoxes/delete-item-dialog/dele
     InventoryComponent,
     AddItemDialogComponent,
     EditItemDialogComponent,
-    DeleteItemDialogComponent
+    DeleteItemDialogComponent,
+    CheckoutComponent,
+    SalesReportComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +68,9 @@ import { DeleteItemDialogComponent } from './dialogBoxes/delete-item-dialog/dele
     MatFormFieldModule,
     MatDialogModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
+
   ],
   providers: [
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'INR' },

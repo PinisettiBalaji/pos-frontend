@@ -1,0 +1,35 @@
+.checkout-container {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.cart-summary {
+    max-height: 200px;
+    overflow-y: auto;
+    font-size: 13px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.cart-summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.total-amount {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+button {
+    width: 48%;
+    font-size: 14px;
+}

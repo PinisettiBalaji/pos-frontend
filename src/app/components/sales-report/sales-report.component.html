@@ -1,0 +1,33 @@
+<div class="report-container">
+    <h2>Sales Reports</h2>
+
+    <div class="report-section">
+        <h3>Daily Report</h3>
+        <ul>
+            <li *ngFor="let order of dailyReport">
+                Order ID: {{ order.orderId }} - Customer: {{ order.customerId }} - Total: {{ order.totalAmount |
+                currency }}
+            </li>
+        </ul>
+    </div>
+
+    <div class="report-section">
+        <h3>Monthly Report</h3>
+        <ul>
+            <li *ngFor="let order of monthlyReport">
+                Order ID: {{ order.orderId }} - Customer: {{ order.customerId }} - Total: {{ order.totalAmount |
+                currency }}
+            </li>
+        </ul>
+    </div>
+
+    <div class="report-section">
+        <h3>Yearly Report</h3>
+        <ul>
+            <li *ngFor="let order of yearlyReport">
+                Order ID: {{ order.orderId }} - Customer: {{ order.customerId }} - Total: {{ order.totalAmount |
+                currency }}
+            </li>
+        </ul>
+    </div>
+</div>
